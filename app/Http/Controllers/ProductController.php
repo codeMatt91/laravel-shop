@@ -35,7 +35,7 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
         $data = $request->all();
 
@@ -46,7 +46,7 @@ class ProductController extends Controller
         $newProduct->image = $data['image'];
         $newProduct->save();
 
-        return redirect()->route('products.index', $newProduct->$id);
+        return redirect()->route('products.index', compact($newProduct));
     }
 
     /**
@@ -83,7 +83,7 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
 
-        $data= $request->all();
+        $data = $request->all();
         $product->fill($data);
         $product->save();
 
