@@ -35,9 +35,18 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+        $data = $request->all();
+
+        $newProduct = new Product();
+        $newProduct->name = $data['name'];
+        $newProduct->description = $data['description'];
+        $newProduct->price = $data['price'];
+        $newProduct->image = $data['image'];
+        $newProduct->save();
+
+        return redirect()->route('products.index', $newProduct->$id);
     }
 
     /**
@@ -58,9 +67,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Product $product)
     {
-        //
+        return view('products.edit', compact('product'));
     }
 
     /**
@@ -72,7 +81,13 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product = Product::findOrFail($id);
+
+        $data= $request->all();
+        $product->fill($data);
+        $product->save();
+
+        return redirect()->route('products.show', $product->id);
     }
 
     /**
@@ -81,8 +96,10 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        //
+        $product->delete();
+
+        return redirect()->route('products.index')->with('message', "$product->title has been successfully deleted")->with('type', 'success');
     }
 }
