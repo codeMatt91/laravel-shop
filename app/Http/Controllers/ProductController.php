@@ -79,15 +79,14 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Product $product)
     {
-        $product = Product::findOrFail($id);
 
         $data = $request->all();
         $product->fill($data);
         $product->save();
 
-        return redirect()->route('products.show', $product->id);
+        return redirect()->route('products.show', compact('product'));
     }
 
     /**
