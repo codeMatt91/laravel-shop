@@ -72,7 +72,13 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product = Product::findOrFail($id);
+
+        $data= $request->all();
+        $product->fill($data);
+        $product->save();
+
+        return redirect()->route('products.show', $product->id);
     }
 
     /**
