@@ -35,9 +35,18 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+        $data = $request->all();
+
+        $newProduct = new Product();
+        $newProduct->name = $data['name'];
+        $newProduct->description = $data['description'];
+        $newProduct->price = $data['price'];
+        $newProduct->image = $data['image'];
+        $newProduct->save();
+
+        return redirect()->route('products.index', $newProduct->$id);
     }
 
     /**
