@@ -17,11 +17,13 @@
                     href="{{ route('products.edit', $product->id) }}">
                     <i class="fa-solid fa-pencil"></i>
                 </a>
-                <form action="{{ route('products.destroy', $product->id) }}" method="post">
+                <form action="{{ route('products.destroy', $product->id) }}"
+                    method="post">
                     @method('DELETE')
                     @csrf
-                    <button class="btn btn-sm btn-danger" type="submit"><i
-                            class="fa-solid fa-trash"></i></button>
+                    <button class="btn btn-sm btn-danger" type="submit">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
                 </form>
             </div>
         @endforeach
