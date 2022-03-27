@@ -9,13 +9,13 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ url('/') }}">Home</a>
+                        <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" aria-current="page" href="{{ url('/') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ route('products.index') }}">Products</a>
+                        <a class="nav-link {{ request()->routeIs('products.index') ? 'active' : '' }}" aria-current="page" href="{{ route('products.index') }}">Products</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ route('products.create') }}">Create Product</a>
+                        <a class="nav-link {{ request()->routeIs('products.create') ? 'active' : '' }}" aria-current="page" href="{{ route('products.create') }}">Create Product</a>
                     </li>
                 </ul>
             </div>
