@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-    <div>
+    <div class="container">
         <figure>
             <img src="{{ $product->image }}" alt="">
         </figure>

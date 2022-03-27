@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-    <div class="container">
+    <div class="container d-flex flex-wrap">
 
 
         @foreach ($products as $product)
@@ -14,14 +14,17 @@
                 <a
                     href="{{ route('products.show', ['product' => $product->id]) }}">Dettagli</a>
                 <a class="btn btn-sm btn-warning"
-                    href="{{ route('products.edit', $product->id) }}">
+                    href="{{ route('products.edit', $product->id) }}"
+                    style="width: 50px">
                     <i class="fa-solid fa-pencil"></i>
                 </a>
                 <form action="{{ route('products.destroy', $product->id) }}"
                     method="post">
                     @method('DELETE')
                     @csrf
-                    <button class="btn btn-sm btn-danger" type="submit">
+                    <button class="btn btn-sm btn-danger" 
+                        type="submit"
+                        style="width: 50px">
                         <i class="fa-solid fa-trash"></i>
                     </button>
                 </form>
