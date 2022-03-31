@@ -11,20 +11,16 @@
                 </figure>
                 <h2>{{ $product->name }}</h2>
                 <div>{{ $product->price }}</div>
-                <a
-                    href="{{ route('products.show', ['product' => $product->id]) }}">Dettagli</a>
-                <a class="btn btn-sm btn-warning"
-                    href="{{ route('products.edit', $product->id) }}"
-                    style="width: 50px">
+                <div>{{ $product->brand->name }} <img width="50" src="{{ $product->brand->image }}"
+                        alt="{{ $product->brand->name }}"></div>
+                <a href="{{ route('products.show', ['product' => $product->id]) }}">Dettagli</a>
+                <a class="btn btn-sm btn-warning" href="{{ route('products.edit', $product->id) }}" style="width: 50px">
                     <i class="fa-solid fa-pencil"></i>
                 </a>
-                <form action="{{ route('products.destroy', $product->id) }}"
-                    method="post">
+                <form action="{{ route('products.destroy', $product->id) }}" method="post">
                     @method('DELETE')
                     @csrf
-                    <button class="btn btn-sm btn-danger" 
-                        type="submit"
-                        style="width: 50px">
+                    <button class="btn btn-sm btn-danger" type="submit" style="width: 50px">
                         <i class="fa-solid fa-trash"></i>
                     </button>
                 </form>
