@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('content')
-    <div class="container py-5">
+    <div class="py-5">
         <form action="{{ route('products.update', $product->id) }}" method="POST">
             @method('PUT')
             @csrf
@@ -15,8 +15,7 @@
                 <div class="col-6">
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>
-                        <input type="text" class="form-control" id="description"
-                            name="description"
+                        <input type="text" class="form-control" id="description" name="description"
                             value="{{ old('description', $product->description) }}">
                     </div>
                 </div>
