@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Product;
 use App\Models\Brand;
+use App\Models\Color;
 
 class ProductController extends Controller
 {
@@ -17,8 +18,9 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
-        $brands= Brand::all();
-        return view('products.index', compact('products', 'brands'));
+        $brands = Brand::all();
+        $colors = Color::all();
+        return view('products.index', compact('products', 'brands', 'colors'));
     }
 
     /**
@@ -28,7 +30,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        $colors = Color::all();
+        $brands = Brand::all();
+        return view('products.create', compact('colors', 'brands'));
     }
 
     /**
@@ -40,15 +44,13 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-
+        // dd($data);
         $newProduct = new Product();
-        $newProduct->name = $data['name'];
-        $newProduct->description = $data['description'];
-        $newProduct->price = $data['price'];
-        $newProduct->image = $data['image'];
+        $newProduct->fill($data);
         $newProduct->save();
+        if (array_key_exists('colors', $data)) $newProduct->colors()->attach($data['colors']);
 
-        return redirect()->route('products.index', compact($newProduct));
+        return redirect()->route('products.index');
     }
 
     /**
@@ -71,7 +73,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        $brands= Brand::all();
+        $brands = Brand::all();
         return view('products.edit', compact('product', 'brands'));
     }
 

@@ -15,6 +15,12 @@ class CreateColorProductTable extends Migration
     {
         Schema::create('color_product', function (Blueprint $table) {
             $table->id();
+
+            $table->unsignedBigInteger('color_id');
+            $table->unsignedBigInteger('product_id');
+            $table->foreign('color_id')->references('id')->on('colors')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+
             $table->timestamps();
         });
     }
@@ -27,5 +33,9 @@ class CreateColorProductTable extends Migration
     public function down()
     {
         Schema::dropIfExists('color_product');
+        // $table->dropforeign('color_product_color_id_foreign');
+        // $table->dropforeign('color_product_product_id_foreign');
+        // $table->dropColumn('color_id');
+        // $table->dropColumn('product_id');
     }
 }
