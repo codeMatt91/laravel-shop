@@ -13,8 +13,20 @@
                 <div>Marca: {{ $product->brand->name }}
                     <img width="50" src="{{ $product->brand->image }}" alt="{{ $product->brand->name }}">
                 </div>
-                <div style="width:10; height:10; background-color:{{ $product->color_id }}">
+                <div class="d-flex">
+                    <h6 class="me-2">Colore:</h6>
+                    @if (count($product->colors))
+                        @foreach ($product->colors as $color)
+                            <div class="p-2 rounded-circle border border-dark"
+                                style="width:20px;height:20px;background-color:{{ $color->color }}"></div>
+                        @endforeach
+                    @else
+                        -
+                    @endif
+
                 </div>
+
+
                 <div class="d-flex justify-content-end align-items-center my-2">
                     <a class="btn btn-sm btn-secondary me-2"
                         href="{{ route('products.show', ['product' => $product->id]) }}">Dettagli</a>
